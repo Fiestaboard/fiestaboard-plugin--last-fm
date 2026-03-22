@@ -12,33 +12,125 @@
   "settings_schema": {
     "type": "object",
     "properties": {
-      "username": {"type": "string", "title": "Last.fm Username", "description": "Your Last.fm username (from your profile URL: last.fm/user/USERNAME)"},
-      "api_key": {"type": "string", "title": "API Key", "description": "Your Last.fm API key (get one free at last.fm/api/account/create)", "ui:widget": "password"},
-      "refresh_seconds": {"type": "integer", "title": "Refresh Interval (seconds)", "description": "How often to check for now playing updates. Lower values = more real-time but more API calls.", "default": 30, "minimum": 10},
-      "show_album": {"type": "boolean", "title": "Show Album Name", "description": "Include album name in the formatted output", "default": false},
-      "enabled": {"type": "boolean", "title": "Enabled", "default": false}
+      "username": {
+        "type": "string",
+        "title": "Last.fm Username",
+        "description": "Your Last.fm username (from your profile URL: last.fm/user/USERNAME)"
+      },
+      "api_key": {
+        "type": "string",
+        "title": "API Key",
+        "description": "Your Last.fm API key (get one free at last.fm/api/account/create)",
+        "ui:widget": "password"
+      },
+      "refresh_seconds": {
+        "type": "integer",
+        "title": "Refresh Interval (seconds)",
+        "description": "How often to check for now playing updates. Lower values = more real-time but more API calls.",
+        "default": 30,
+        "minimum": 10
+      },
+      "show_album": {
+        "type": "boolean",
+        "title": "Show Album Name",
+        "description": "Include album name in the formatted output",
+        "default": false
+      },
+      "enabled": {
+        "type": "boolean",
+        "title": "Enabled",
+        "default": false
+      }
     },
-    "required": ["username", "api_key"]
+    "required": [
+      "username",
+      "api_key"
+    ]
   },
   "env_vars": [
-    {"name": "LASTFM_USERNAME", "required": false, "description": "Last.fm username (can also be set in UI)"},
-    {"name": "LASTFM_API_KEY", "required": false, "description": "Last.fm API key (can also be set in UI)"}
+    {
+      "name": "LASTFM_USERNAME",
+      "required": false,
+      "description": "Last.fm username (can also be set in UI)"
+    },
+    {
+      "name": "LASTFM_API_KEY",
+      "required": false,
+      "description": "Last.fm API key (can also be set in UI)"
+    }
   ],
   "variables": {
     "groups": {
-      "track": {"label": "Track Info"},
-      "playback": {"label": "Playback"}
+      "track": {
+        "label": "Track Info"
+      },
+      "playback": {
+        "label": "Playback"
+      }
     },
     "simple": {
-      "title": {"description": "Track title currently playing or last played", "type": "string", "max_length": 22, "group": "track", "example": "Bohemian Rhapsody"},
-      "artist": {"description": "Artist name", "type": "string", "max_length": 22, "group": "track", "example": "Queen"},
-      "album": {"description": "Album name", "type": "string", "max_length": 22, "group": "track", "example": "A Night at the Opera"},
-      "is_playing": {"description": "Whether a track is currently playing (true/false)", "type": "boolean", "group": "playback", "example": "true"},
-      "artwork_url": {"description": "URL to the album artwork image", "type": "string", "group": "playback", "example": "https://lastfm.freetls.fastly.net/..."},
-      "track_url": {"description": "URL to the track page on Last.fm", "type": "string", "group": "playback", "example": "https://www.last.fm/music/..."},
-      "formatted": {"description": "Pre-formatted now playing display string", "type": "string", "max_length": 22, "group": "playback", "example": "Bohemian Rhapsody"},
-      "status": {"description": "Playback status text", "type": "string", "max_length": 22, "group": "playback", "example": "Now Playing"}
+      "title": {
+        "description": "Track title currently playing or last played",
+        "type": "string",
+        "max_length": 22,
+        "group": "track",
+        "example": "Bohemian Rhapsody"
+      },
+      "artist": {
+        "description": "Artist name",
+        "type": "string",
+        "max_length": 22,
+        "group": "track",
+        "example": "Queen"
+      },
+      "album": {
+        "description": "Album name",
+        "type": "string",
+        "max_length": 22,
+        "group": "track",
+        "example": "A Night at the Opera"
+      },
+      "is_playing": {
+        "description": "Whether a track is currently playing (true/false)",
+        "type": "boolean",
+        "group": "playback",
+        "example": "true"
+      },
+      "artwork_url": {
+        "description": "URL to the album artwork image",
+        "type": "string",
+        "group": "playback",
+        "example": "https://lastfm.freetls.fastly.net/..."
+      },
+      "track_url": {
+        "description": "URL to the track page on Last.fm",
+        "type": "string",
+        "group": "playback",
+        "example": "https://www.last.fm/music/..."
+      },
+      "formatted": {
+        "description": "Pre-formatted now playing display string",
+        "type": "string",
+        "max_length": 22,
+        "group": "playback",
+        "example": "Bohemian Rhapsody"
+      },
+      "status": {
+        "description": "Playback status text",
+        "type": "string",
+        "max_length": 22,
+        "group": "playback",
+        "example": "Now Playing"
+      }
     }
   },
-  "fiestaboard_version": ">=2.10.0"
+  "fiestaboard_version": ">=2.10.0",
+  "screenshots": [
+    {
+      "src": "docs/board-display.png",
+      "alt": "Last.fm Now Playing displayed on a Vestaboard",
+      "caption": "Display what's currently playing via Last.fm scrobbling. Works with Apple Music, Spotify, and any scrobbling source.",
+      "primary": true
+    }
+  ]
 }
