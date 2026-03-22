@@ -1,6 +1,8 @@
 """Unit tests for Last.fm Now Playing plugin."""
 
+import json
 import pytest
+from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 from datetime import datetime, timedelta
 
@@ -415,3 +417,39 @@ class TestLastFmPlugin:
         assert params["api_key"] == "test_api_key_12345"
         assert params["format"] == "json"
         assert params["limit"] == 1
+
+
+class TestManifestMetadata:
+    """Tests for the rich metadata format in the manifest."""
+
+    def test_manifest_uses_dict_simple_format(self):
+        manifest_path = Path(__file__).parent.parent / "manifest.json"
+        with open(manifest_path) as f:
+            manifest = json.load(f)
+        assert isinstance(manifest["variables"]["simple"], dict)
+
+    def test_all_variables_have_descriptions(self):
+        manifest_path = Path(__file__).parent.parent / "manifest.json"
+        with open(manifest_path) as f:
+            manifest = json.load(f)
+        for var_name, meta in manifest["variables"]["simple"].items():
+            assert "description" in meta and meta["description"], f"Variable '{var_name}' missing description"
+
+    def test_all_variables_have_valid_groups(self):
+        manifest_path = Path(__file__).parent.parent / "manifest.json"
+        with open(manifest_path) as f:
+            manifest = json.load(f)
+        groups = set(manifest["variables"].get("groups", {}).keys())
+        for var_name, meta in manifest["variables"]["simple"].items():
+            group = meta.get("group", "")
+            if group:
+                assert group in groups, f"Variable '{var_name}' references undefined group '{group}'"
+
+    def test_groups_are_defined(self):
+        manifest_path = Path(__file__).parent.parent / "manifest.json"
+        with open(manifest_path) as f:
+            manifest = json.load(f)
+        groups = manifest["variables"].get("groups", {})
+        assert len(groups) > 0
+        for gid, gdef in groups.items():
+            assert "label" in gdef, f"Group '{gid}' missing label"
