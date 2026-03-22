@@ -2,7 +2,7 @@
 
 Display what's currently playing on your Vestaboard via Last.fm scrobbling.
 
-![Last.fm Now Playing Display](./docs/last-fm-display.png)
+![Last.fm Now Playing Display](./docs/board-display.png)
 
 **→ [Setup Guide](./docs/SETUP.md)** - API key registration and configuration
 
