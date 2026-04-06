@@ -1,7 +1,7 @@
 {
   "id": "last_fm",
   "name": "Last.fm Now Playing",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Display what's currently playing via Last.fm scrobbling. Works with Apple Music, Spotify, and any scrobbling source.",
   "author": "FiestaBoard",
   "icon": "music",
@@ -132,5 +132,43 @@
       "caption": "Display what's currently playing via Last.fm scrobbling. Works with Apple Music, Spotify, and any scrobbling source.",
       "primary": true
     }
-  ]
+  ],
+  "demo": {
+    "name": "Last.fm Now Playing Demo",
+    "device_type": "flagship",
+    "template": [
+      "Now Playing",
+      "{{last_fm.title}}",
+      "{{last_fm.artist}}",
+      "{{last_fm.album}}",
+      "{{last_fm.status}}",
+      ""
+    ],
+    "line_metadata": [
+      {
+        "alignment": "center",
+        "wrap": false
+      },
+      {
+        "alignment": "center",
+        "wrap": true
+      },
+      {
+        "alignment": "center",
+        "wrap": true
+      },
+      {
+        "alignment": "center",
+        "wrap": true
+      },
+      {
+        "alignment": "center",
+        "wrap": false
+      },
+      {
+        "alignment": "center",
+        "wrap": false
+      }
+    ]
+  }
 }
