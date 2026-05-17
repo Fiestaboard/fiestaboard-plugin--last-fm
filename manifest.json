@@ -1,7 +1,7 @@
 {
   "id": "last_fm",
   "name": "Last.fm Now Playing",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Display what's currently playing via Last.fm scrobbling. Works with Apple Music, Spotify, and any scrobbling source.",
   "author": "FiestaBoard",
   "icon": "music",
