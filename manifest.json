@@ -149,7 +149,7 @@
     {
       "device_type": "note",
       "rows": [
-        "NOW PLAYING",
+        "{63}{63} NOW PLAYING",
         "BOHEMIAN RHAP.",
         "QUEEN"
       ]
