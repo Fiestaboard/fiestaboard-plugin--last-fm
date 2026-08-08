@@ -133,6 +133,28 @@
       "primary": true
     }
   ],
+  "teaser": "NOW: QUEEN",
+  "previews": [
+    {
+      "device_type": "flagship",
+      "rows": [
+        "{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}",
+        "     NOW PLAYING",
+        "  BOHEMIAN RHAPSODY",
+        "         QUEEN",
+        " A NIGHT AT THE OPERA",
+        "{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}{68}"
+      ]
+    },
+    {
+      "device_type": "note",
+      "rows": [
+        "NOW PLAYING",
+        "BOHEMIAN RHAP.",
+        "QUEEN"
+      ]
+    }
+  ],
   "demo": {
     "flagship": {
       "name": "Last.fm Now Playing Demo",
