@@ -60,6 +60,17 @@ class LastFmPlugin(PluginBase):
         
         return errors
     
+    def on_config_change(self, old_config: Dict[str, Any], new_config: Dict[str, Any]) -> None:
+        """Drop the cached track so a config change takes effect immediately.
+        
+        The cache is keyed only on age, so without this a change to
+        `username` would keep serving the old user's track for up to
+        refresh_seconds.
+        """
+        self._cache = None
+        self._cache_time = None
+        logger.debug("Cleared cached track after config change")
+    
     def _get_username(self) -> str:
         """Get username from config or environment."""
         return (

@@ -214,6 +214,27 @@ class TestLastFmPlugin:
         assert result2.data["title"] == result1.data["title"]
     
     @patch('plugins.last_fm.requests.get')
+    def test_fetch_data_config_change_invalidates_cache(self, mock_get, sample_manifest, sample_config, nowplaying_response):
+        """Test a config change drops the cache instead of serving the old user's track."""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = nowplaying_response
+        mock_get.return_value = mock_response
+        
+        plugin = LastFmPlugin(sample_manifest)
+        plugin.config = sample_config
+        plugin.fetch_data()
+        assert mock_get.call_count == 1
+        
+        # Same cache window, different user: the cached track is now wrong
+        plugin.config = {**sample_config, "username": "otheruser"}
+        assert plugin._cache is None
+        
+        plugin.fetch_data()
+        assert mock_get.call_count == 2
+        assert mock_get.call_args.kwargs["params"]["user"] == "otheruser"
+    
+    @patch('plugins.last_fm.requests.get')
     def test_fetch_data_cache_expires(self, mock_get, sample_manifest, sample_config, nowplaying_response):
         """Test fetch_data refreshes cache after interval."""
         mock_response = Mock()
