@@ -78,7 +78,11 @@ class TestLastFmPlugin:
         assert result.data["is_playing"] is True
         assert result.data["status"] == "NOW PLAYING"
         assert "extralarge" in result.data["artwork_url"]
-        assert "Test Song by Test Artist" in result.data["formatted"]
+        # "formatted" is a single-line template variable the manifest caps at
+        # 22 characters (see MAX_VAR_LENGTH); a longer title+artist combo is
+        # ellipsized rather than left to silently exceed the declared bound.
+        assert result.data["formatted"].startswith("Test Song by Test")
+        assert len(result.data["formatted"]) <= 22
     
     @patch('plugins.last_fm.requests.get')
     def test_fetch_data_recent_track(self, mock_get, sample_manifest, sample_config, recent_track_response):
@@ -377,9 +381,13 @@ class TestLastFmPlugin:
         
         assert lines is not None
         assert len(lines) == 6
-        assert "NOW PLAYING" in lines[0]
-        assert "Test Song" in lines[2]
-        assert "Test Artist" in lines[3]
+        # With no board bound, the display defaults to a Flagship (22x6) and
+        # centres its content vertically -- there's room for the whole card
+        # (status/title/artist/album) plus blank padding, so the exact row
+        # index of any one field isn't fixed. See `_layout_lines`.
+        assert any("NOW PLAYING" in line for line in lines)
+        assert any("Test Song" in line for line in lines)
+        assert any("Test Artist" in line for line in lines)
     
     @patch('plugins.last_fm.requests.get')
     def test_get_formatted_display_with_album(self, mock_get, sample_manifest, nowplaying_response):

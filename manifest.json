@@ -1,7 +1,7 @@
 {
   "id": "last_fm",
   "name": "Last.fm Now Playing",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Display what's currently playing via Last.fm scrobbling. Works with Apple Music, Spotify, and any scrobbling source.",
   "author": "FiestaBoard",
   "icon": "music",
@@ -152,6 +152,20 @@
         "{63}{63} NOW PLAYING",
         "BOHEMIAN RHAP.",
         "QUEEN"
+      ]
+    },
+    {
+      "label": "Note Array (1 wide x 2 tall)",
+      "device_type": "note_array",
+      "notes_wide": 1,
+      "notes_tall": 2,
+      "rows": [
+        "  NOW PLAYING  ",
+        "    BOHEMIAN   ",
+        "    RHAPSODY   ",
+        "     QUEEN     ",
+        " A NIGHT AT THE",
+        "     OPERA     "
       ]
     }
   ],
